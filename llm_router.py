@@ -76,7 +76,7 @@ def get_doctor_suggestions(query):
         return f"Here are some suggestions I found:\n\n{suggestions}"
 
     except Exception as e:
-        return f"⚠️ Error fetching search results: {str(e)}"
+        return f"Error fetching search results: {str(e)}"
 
 def get_response_from_medgemma(chat_history):
     # Load persistent memory
@@ -116,10 +116,11 @@ def get_response_from_medgemma(chat_history):
         data = response.json()
         return data.get("response", "").strip()
     except requests.exceptions.RequestException as e:
-        return f"⚠️ Error connecting to Ollama: {str(e)}"
+        return f"Error connecting to Ollama: {str(e)}"
 
 def route_message(prompt, chat_history):
     update_memory(prompt)  # update stored facts
     if is_search_query(prompt):
         return get_doctor_suggestions(prompt)
     return get_response_from_medgemma(chat_history)
+
