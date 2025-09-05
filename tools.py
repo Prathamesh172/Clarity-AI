@@ -21,7 +21,7 @@ def search_doctors(location, specialty="therapist"):
         data = response.json()
 
         if "results" not in data:
-            return "❌ No results found. Try another location or specialty."
+            return "No results found. Try another location or specialty."
 
         results = data["results"]
         formatted_results = "\n\n".join(
@@ -30,4 +30,5 @@ def search_doctors(location, specialty="therapist"):
         return f"Here are some {specialty}s in {location}:\n\n{formatted_results}"
 
     except requests.exceptions.RequestException as e:
-        return f"⚠️ Error during search: {str(e)}"
+
+        return f"Error during search: {str(e)}"
